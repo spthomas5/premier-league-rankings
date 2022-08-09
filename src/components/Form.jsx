@@ -12,7 +12,6 @@ export default function Form() {
     }
         }
         
-
     function handleSubmit(event) {
         event.preventDefault()
     }
@@ -26,25 +25,39 @@ export default function Form() {
             const response = await fetch(`https://api-football-standings.azharimm.site/leagues/eng.1/standings?season=${season}&sort=asc`)
             const json = await response.json()
             setData(json)
-            console.log("SET DATA")
         } 
         catch (error) {
-            console.log("error")
+            console.log(`Error: ${error} `)
         }
     };
     
     return (
         <div>
-            <form>
-                <label htmlFor="">Select a year</label>
-                <input type="number" className="year-select" value={season} onChange={handleChange} min="2001" max="2022" step="1" />
+            <form className="flex justify-center mb-6" >
+                <label htmlFor="" className="inline-block h-6 pr-3 mt-14">Select a year</label>
+                <input type="number" className="h-6 border border-gray-800 mt-14 pl-3" value={season} onChange={handleChange} min="2001" max="2022" step="1" />
             </form>
             <br />
-            <div className="cards">
-                {data && data.data.standings.map((standing, index) => (
-                    <Card info={standing} index={index} />
-                ))}
-            </div>
+            <table className="table-auto mx-auto text-xl border-collapse">
+                <thead>
+                    <tr className="rounded-br-lg">
+                        <th className="p-5"></th>
+                        <th className="p-5">Rank</th>
+                        <th className="p-5">Team</th>
+                        <th className="p-5">Matches played</th>
+                        <th className="p-5">Wins</th>
+                        <th className="p-5">Draws</th>
+                        <th className="p-5">Losses</th>
+                        <th className="p-5">Goals For</th>
+                        <th className="p-5">Goals Against</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data && data.data.standings.map((standing, index) => (
+                        <Card info={standing} index={index} />
+                    ))}
+                </tbody>
+            </table>
         </div>
     )  
 }

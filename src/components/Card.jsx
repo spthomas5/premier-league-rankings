@@ -3,16 +3,16 @@ import React from "react"
 export default function Card(props) {
     const rank = props.index + 1
     return (
-        <div className={`card ${rank % 2 == 0 ? "card-white" : "card-purple"}`}>
-            <div className="card-left">
-                <h4 className="">{rank}</h4>
-                <img src={props.info.team.logos[0].href} className="team-logo" align="left" alt="" />
-            </div>
-        
-            <h4 className="card-center"> {props.info.team.location}</h4>
-            <div className="record">
-                <b>{props.info.stats[12].summary}</b>
-            </div>
-        </div>
+        <tr className={rank % 2 == 0 ? "bg-indigo-400 text-white" : null}>
+            <td className="text-center pt-3 pb-3 pl-3"><img src={props.info.team.logos[0].href} className="w-12 mx-auto" alt="" /> </td>
+            <td className="text-center pt-3 pb-3">{rank}</td>
+            <td className="text-center">{props.info.team.name}</td>
+            <td className="text-center">{props.info.stats[3].value}</td>
+            <td className="text-center">{props.info.stats[0].value}</td>
+            <td className="text-center">{props.info.stats[2].value}</td>
+            <td className="text-center">{props.info.stats[1].value}</td>
+            <td className="text-center">{props.info.stats[4].value}</td>
+            <td className="text-center">{props.info.stats[5].value}</td>    
+        </tr>     
     )
 }
